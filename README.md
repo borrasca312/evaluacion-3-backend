@@ -2,6 +2,8 @@
 
 Proyecto Django para la Evaluación N°3 (Programación Backend).
 
+**Repositorio GitHub**: https://github.com/borrasca312/evaluacion-3-backend
+
 ## Requisitos mínimos
 - Python 3.10+
 - Django 4.2+
