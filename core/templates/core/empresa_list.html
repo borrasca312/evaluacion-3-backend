@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Empresas</h1>
+<a class="btn btn-primary mb-2" href="{% url 'empresa_create' %}">Crear Empresa</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>RUT</th>
+            <th>Razón social</th>
+            <th>Comuna</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{ obj.rut }}</td>
+            <td><a href="{% url 'empresa_detail' obj.pk %}">{{ obj.razon_social }}</a></td>
+            <td>{{ obj.comuna }}</td>
+            <td><a class="btn btn-sm btn-secondary" href="{% url 'empresa_update' obj.pk %}">Editar</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'empresa_delete' obj.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay empresas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

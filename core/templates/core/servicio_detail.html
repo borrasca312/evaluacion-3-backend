@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Servicio: {{ object.nombre }}</h1>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Categoría:</strong> {{ object.categoria }}</li>
+    <li class="list-group-item"><strong>Descripción:</strong> {{ object.descripcion }}</li>
+    <li class="list-group-item"><strong>Duración estimada (hrs):</strong> {{ object.duracion_estimada_horas }}</li>
+    <li class="list-group-item"><strong>Activo:</strong> {{ object.activo|yesno:"Sí,No" }}</li>
+</ul>
+<a class="btn btn-secondary mt-3" href="{% url 'servicio_update' object.pk %}">Editar</a>
+<a class="btn btn-danger mt-3" href="{% url 'servicio_delete' object.pk %}">Eliminar</a>
+{% endblock %}

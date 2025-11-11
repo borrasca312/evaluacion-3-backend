@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Empresa: {{ object.razon_social }}</h1>
+<ul class="list-group">
+    <li class="list-group-item"><strong>RUT:</strong> {{ object.rut }}</li>
+    <li class="list-group-item"><strong>Giro:</strong> {{ object.giro }}</li>
+    <li class="list-group-item"><strong>Teléfono:</strong> {{ object.telefono }}</li>
+    <li class="list-group-item"><strong>Email:</strong> {{ object.email }}</li>
+    <li class="list-group-item"><strong>Dirección:</strong> {{ object.direccion }}</li>
+    <li class="list-group-item"><strong>Comuna:</strong> {{ object.comuna }}</li>
+</ul>
+<a class="btn btn-secondary mt-3" href="{% url 'empresa_update' object.pk %}">Editar</a>
+<a class="btn btn-danger mt-3" href="{% url 'empresa_delete' object.pk %}">Eliminar</a>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Órdenes de Servicio</h1>
+<a class="btn btn-primary mb-2" href="{% url 'orden_create' %}">Crear Orden</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Empresa</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{ obj.id }}</td>
+            <td>{{ obj.empresa }}</td>
+            <td>{{ obj.fecha_creacion }}</td>
+            <td>{{ obj.get_estado_display }}</td>
+            <td>{{ obj.get_prioridad_display }}</td>
+            <td><a class="btn btn-sm btn-secondary" href="{% url 'orden_detail' obj.pk %}">Ver</a>
+                <a class="btn btn-sm btn-secondary" href="{% url 'orden_update' obj.pk %}">Editar</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'orden_delete' obj.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No hay órdenes.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

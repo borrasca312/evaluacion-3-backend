@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Orden #{{ object.id }}</h1>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Empresa:</strong> {{ object.empresa }}</li>
+    <li class="list-group-item"><strong>Fecha creación:</strong> {{ object.fecha_creacion }}</li>
+    <li class="list-group-item"><strong>Estado:</strong> {{ object.get_estado_display }}</li>
+    <li class="list-group-item"><strong>Prioridad:</strong> {{ object.get_prioridad_display }}</li>
+    <li class="list-group-item"><strong>Profesional asignado:</strong> {{ object.profesional_asignado }}</li>
+    <li class="list-group-item"><strong>Servicios:</strong>
+        <ul>
+            {% for s in object.servicios_seleccionados.all %}
+            <li>{{ s.nombre }}</li>
+            {% empty %}
+            <li>Sin servicios seleccionados</li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li class="list-group-item"><strong>Descripción:</strong> {{ object.descripcion_requerimiento }}</li>
+</ul>
+<a class="btn btn-secondary mt-3" href="{% url 'orden_update' object.pk %}">Editar</a>
+<a class="btn btn-danger mt-3" href="{% url 'orden_delete' object.pk %}">Eliminar</a>
+{% endblock %}

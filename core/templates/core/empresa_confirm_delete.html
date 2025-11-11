@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Eliminar Empresa</h1>
+<p>¿Confirma eliminar la empresa <strong>{{ object.razon_social }}</strong>?</p>
+<form method="post">{% csrf_token %}
+    <a class="btn btn-secondary" href="{% url 'empresa_list' %}">Cancelar</a>
+    <button class="btn btn-danger" type="submit">Eliminar</button>
+</form>
+{% endblock %}

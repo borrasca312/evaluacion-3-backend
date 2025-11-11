@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Profesionales</h1>
+<a class="btn btn-primary mb-2" href="{% url 'profesional_create' %}">Crear Profesional</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>RUN</th>
+            <th>Nombre</th>
+            <th>Especialidad</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{ obj.run }}</td>
+            <td><a href="{% url 'profesional_detail' obj.pk %}">{{ obj.nombres }} {{ obj.apellidos }}</a></td>
+            <td>{{ obj.especialidad }}</td>
+            <td>{{ obj.email }}</td>
+            <td><a class="btn btn-sm btn-secondary" href="{% url 'profesional_update' obj.pk %}">Editar</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'profesional_delete' obj.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No hay profesionales.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

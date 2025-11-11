@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Profesional: {{ object.nombres }} {{ object.apellidos }}</h1>
+<ul class="list-group">
+    <li class="list-group-item"><strong>RUN:</strong> {{ object.run }}</li>
+    <li class="list-group-item"><strong>Especialidad:</strong> {{ object.especialidad }}</li>
+    <li class="list-group-item"><strong>Email:</strong> {{ object.email }}</li>
+</ul>
+<a class="btn btn-secondary mt-3" href="{% url 'profesional_update' object.pk %}">Editar</a>
+<a class="btn btn-danger mt-3" href="{% url 'profesional_delete' object.pk %}">Eliminar</a>
+{% endblock %}
