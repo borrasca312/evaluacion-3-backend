@@ -5,12 +5,29 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Empresa, Servicio, Profesional, OrdenServicio
 from .forms import EmpresaForm, ServicioForm, ProfesionalForm, OrdenServicioForm
 
+"""
+Vistas genéricas (Class-Based Views) para las operaciones CRUD.
+
+Características:
+  - ListViews con búsqueda por query (parámetro GET 'q').
+  - LoginRequiredMixin en Create/Update/Delete (solo usuarios autenticados).
+  - DetailViews para ver detalles de cada entidad.
+  - Búsqueda case-insensitive usando Q() con icontains.
+"""
+
 
 class EmpresaListView(ListView):
+    """
+    Listado de empresas con búsqueda.
+    
+    Búsqueda: parámetro GET 'q' busca en RUT, razón social y email.
+    Ejemplo: /empresas/?q=PYME
+    """
     model = Empresa
     template_name = 'core/empresa_list.html'
     
     def get_queryset(self):
+        """Aplica filtro de búsqueda si existe el parámetro 'q' en la URL."""
         qs = super().get_queryset()
         q = self.request.GET.get('q', '').strip()
         if q:
@@ -26,6 +43,10 @@ class EmpresaDetailView(DetailView):
 
 
 class EmpresaCreateView(LoginRequiredMixin, CreateView):
+    """
+    Crear empresa. Protegida con LoginRequiredMixin.
+    Solo usuarios autenticados pueden acceder. Redirige a login si no está autenticado.
+    """
     model = Empresa
     form_class = EmpresaForm
     template_name = 'core/empresa_form.html'
@@ -127,16 +148,29 @@ class ProfesionalDeleteView(LoginRequiredMixin, DeleteView):
 
 # OrdenServicio views
 class OrdenServicioListView(ListView):
+    """
+    Listado de órdenes de servicio con búsqueda y filtros avanzados.
+    
+    Parámetros GET:
+        - 'q': Búsqueda general en empresa, descripción y profesional asignado.
+        - 'estado': Filtrar por estado (nueva, en_ejecucion, finalizada, cancelada).
+        - 'prioridad': Filtrar por prioridad (baja, media, alta).
+        - 'empresa': Búsqueda por nombre o RUT de empresa.
+    
+    Ejemplo: /ordenes/?q=diagnóstico&estado=nueva&prioridad=alta
+    """
     model = OrdenServicio
     template_name = 'core/orden_list.html'
 
     def get_queryset(self):
+        """Aplica filtros múltiples según parámetros GET."""
         qs = super().get_queryset()
         q = self.request.GET.get('q', '').strip()
         estado = self.request.GET.get('estado', '').strip()
         prioridad = self.request.GET.get('prioridad', '').strip()
         empresa = self.request.GET.get('empresa', '').strip()
 
+        # Búsqueda general (Q con OR)
         if q:
             qs = qs.filter(
                 Q(empresa__razon_social__icontains=q)
@@ -144,6 +178,8 @@ class OrdenServicioListView(ListView):
                 | Q(profesional_asignado__nombres__icontains=q)
                 | Q(profesional_asignado__apellidos__icontains=q)
             )
+        
+        # Filtros específicos
         if estado:
             qs = qs.filter(estado=estado)
         if prioridad:
