@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Empresa, Servicio, Profesional, OrdenServicio
 from .forms import EmpresaForm, ServicioForm, ProfesionalForm, OrdenServicioForm
@@ -8,6 +9,15 @@ from .forms import EmpresaForm, ServicioForm, ProfesionalForm, OrdenServicioForm
 class EmpresaListView(ListView):
     model = Empresa
     template_name = 'core/empresa_list.html'
+    
+    def get_queryset(self):
+        qs = super().get_queryset()
+        q = self.request.GET.get('q', '').strip()
+        if q:
+            qs = qs.filter(
+                Q(razon_social__icontains=q) | Q(rut__icontains=q) | Q(email__icontains=q)
+            )
+        return qs
 
 
 class EmpresaDetailView(DetailView):
@@ -39,6 +49,15 @@ class EmpresaDeleteView(LoginRequiredMixin, DeleteView):
 class ServicioListView(ListView):
     model = Servicio
     template_name = 'core/servicio_list.html'
+    
+    def get_queryset(self):
+        qs = super().get_queryset()
+        q = self.request.GET.get('q', '').strip()
+        if q:
+            qs = qs.filter(
+                Q(nombre__icontains=q) | Q(descripcion__icontains=q) | Q(categoria__icontains=q)
+            )
+        return qs
 
 
 class ServicioDetailView(DetailView):
@@ -70,6 +89,15 @@ class ServicioDeleteView(LoginRequiredMixin, DeleteView):
 class ProfesionalListView(ListView):
     model = Profesional
     template_name = 'core/profesional_list.html'
+    
+    def get_queryset(self):
+        qs = super().get_queryset()
+        q = self.request.GET.get('q', '').strip()
+        if q:
+            qs = qs.filter(
+                Q(nombres__icontains=q) | Q(apellidos__icontains=q) | Q(run__icontains=q) | Q(email__icontains=q)
+            )
+        return qs
 
 
 class ProfesionalDetailView(DetailView):
@@ -101,6 +129,29 @@ class ProfesionalDeleteView(LoginRequiredMixin, DeleteView):
 class OrdenServicioListView(ListView):
     model = OrdenServicio
     template_name = 'core/orden_list.html'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        q = self.request.GET.get('q', '').strip()
+        estado = self.request.GET.get('estado', '').strip()
+        prioridad = self.request.GET.get('prioridad', '').strip()
+        empresa = self.request.GET.get('empresa', '').strip()
+
+        if q:
+            qs = qs.filter(
+                Q(empresa__razon_social__icontains=q)
+                | Q(descripcion_requerimiento__icontains=q)
+                | Q(profesional_asignado__nombres__icontains=q)
+                | Q(profesional_asignado__apellidos__icontains=q)
+            )
+        if estado:
+            qs = qs.filter(estado=estado)
+        if prioridad:
+            qs = qs.filter(prioridad=prioridad)
+        if empresa:
+            qs = qs.filter(Q(empresa__razon_social__icontains=empresa) | Q(empresa__rut__icontains=empresa))
+
+        return qs
 
 
 class OrdenServicioDetailView(DetailView):

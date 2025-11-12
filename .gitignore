@@ -1,3 +1,24 @@
+# Virtual environment
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite DB
+db.sqlite3
+
+# VSCode
+.vscode/
+
+# Byte-compiled / optimized
+*.egg-info/
+dist/
+build/
+
+# macOS
+.DS_Store
 # Python
 *.py[cod]
 __pycache__/

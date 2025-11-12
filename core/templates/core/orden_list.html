@@ -2,6 +2,34 @@
 {% block content %}
 <h1>Órdenes de Servicio</h1>
 <a class="btn btn-primary mb-2" href="{% url 'orden_create' %}">Crear Orden</a>
+
+<form method="get" class="mb-3 form-inline">
+    <div class="row g-2">
+        <div class="col-auto">
+            <input type="text" name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Buscar empresa, descripción o profesional">
+        </div>
+        <div class="col-auto">
+            <select name="estado" class="form-select">
+                <option value="">-- Estado --</option>
+                <option value="nueva" {% if request.GET.estado == 'nueva' %}selected{% endif %}>Nueva</option>
+                <option value="en_ejecucion" {% if request.GET.estado == 'en_ejecucion' %}selected{% endif %}>En ejecución</option>
+                <option value="finalizada" {% if request.GET.estado == 'finalizada' %}selected{% endif %}>Finalizada</option>
+                <option value="cancelada" {% if request.GET.estado == 'cancelada' %}selected{% endif %}>Cancelada</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <select name="prioridad" class="form-select">
+                <option value="">-- Prioridad --</option>
+                <option value="baja" {% if request.GET.prioridad == 'baja' %}selected{% endif %}>Baja</option>
+                <option value="media" {% if request.GET.prioridad == 'media' %}selected{% endif %}>Media</option>
+                <option value="alta" {% if request.GET.prioridad == 'alta' %}selected{% endif %}>Alta</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+        </div>
+    </div>
+</form>
 <table class="table table-striped">
     <thead>
         <tr>

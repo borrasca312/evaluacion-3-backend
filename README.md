@@ -29,6 +29,16 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+### Nota sobre PowerShell ExecutionPolicy
+
+Si al activar el entorno recibes un error relacionado con la política de ejecución en PowerShell, ejecuta (como administrador) una vez:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Esto permite ejecutar el script `Activate.ps1` en tu perfil de usuario.
+
 ### Paso 3: Crear base de datos y datos iniciales
 ```powershell
 python manage.py migrate
@@ -43,6 +53,24 @@ El script `init_project.py` creará automáticamente:
 ```powershell
 python manage.py runserver
 ```
+
+### Instrucciones rápidas (comandos exactos para PowerShell)
+
+```powershell
+cd path\to\evaluacion-3-backend
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1   # activar el venv en PowerShell
+.\.venv\Scripts\python -m pip install --upgrade pip
+.\.venv\Scripts\python -m pip install -r requirements.txt
+.\.venv\Scripts\python manage.py migrate
+.\.venv\Scripts\python init_project.py
+.\.venv\Scripts\python manage.py runserver
+```
+
+### Notas de seguridad / buenas prácticas
+
+- No comites tu `SECRET_KEY` ni credenciales en repositorios públicos. En `project/settings.py` hay una clave de desarrollo; en producción usa variables de entorno.
+- Añadí un `.gitignore` para excluir `.venv/` y `db.sqlite3`.
 
 ### 🔐 Credenciales de acceso
 - **Usuario**: `admin`
