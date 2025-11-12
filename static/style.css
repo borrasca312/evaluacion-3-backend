@@ -1,0 +1,219 @@
+/* Colores oficiales INACAP */
+:root {
+    --inacap-rojo: #E30613;
+    --inacap-rojo-oscuro: #B30510;
+    --inacap-negro: #1A1A1A;
+    --inacap-gris: #4A4A4A;
+    --inacap-gris-claro: #F5F5F5;
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--inacap-gris-claro);
+}
+
+/* Navbar */
+.navbar-inacap {
+    background: linear-gradient(135deg, var(--inacap-rojo) 0%, var(--inacap-rojo-oscuro) 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+}
+
+.navbar-inacap .navbar-brand {
+    color: white !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navbar-inacap .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+}
+
+.navbar-inacap .nav-link:hover {
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+/* Botones */
+.btn-primary {
+    background-color: var(--inacap-rojo);
+    border-color: var(--inacap-rojo);
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--inacap-rojo-oscuro);
+    border-color: var(--inacap-rojo-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(227, 6, 19, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--inacap-gris);
+    border-color: var(--inacap-gris);
+    font-weight: 600;
+}
+
+.btn-secondary:hover {
+    background-color: var(--inacap-negro);
+    border-color: var(--inacap-negro);
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    font-weight: 600;
+}
+
+/* Tablas */
+.table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.table thead {
+    background-color: var(--inacap-negro);
+    color: white;
+}
+
+.table thead th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border: none;
+    padding: 1rem;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(227, 6, 19, 0.05);
+    transform: scale(1.01);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Tarjetas */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.list-group-item {
+    border-left: 3px solid var(--inacap-rojo);
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: rgba(227, 6, 19, 0.05);
+    border-left-width: 5px;
+}
+
+.list-group-item strong {
+    color: var(--inacap-rojo);
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--inacap-negro);
+    font-weight: 700;
+}
+
+h1 {
+    border-bottom: 3px solid var(--inacap-rojo);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Contenedor principal */
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Formularios */
+.form-label {
+    color: var(--inacap-negro);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-control,
+.form-select {
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--inacap-rojo);
+    box-shadow: 0 0 0 0.2rem rgba(227, 6, 19, 0.15);
+}
+
+/* Alertas */
+.alert {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Badges y etiquetas */
+.badge {
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+/* Animaciones suaves */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .navbar-inacap .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+}
