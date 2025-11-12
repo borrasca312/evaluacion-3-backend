@@ -8,21 +8,47 @@ Proyecto Django para la Evaluación N°3 (Programación Backend).
 - Python 3.10+
 - Django 4.2+
 
-## Instalación rápida
+## 🚀 Instalación rápida (desde GitHub)
 
+### Paso 1: Clonar o descargar el repositorio
+```powershell
+# Opción A: Clonar con Git
+git clone https://github.com/borrasca312/evaluacion-3-backend.git
+cd evaluacion-3-backend
+
+# Opción B: Descargar ZIP desde GitHub
+# 1. Ir a https://github.com/borrasca312/evaluacion-3-backend
+# 2. Click en "Code" > "Download ZIP"
+# 3. Extraer y abrir terminal en la carpeta
+```
+
+### Paso 2: Crear entorno virtual e instalar dependencias
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+```
+
+### Paso 3: Crear base de datos y datos iniciales
+```powershell
 python manage.py migrate
-python manage.py createsuperuser
+python init_project.py
+```
+
+El script `init_project.py` creará automáticamente:
+- ✅ Usuario admin con contraseña `admin123`
+- ✅ Datos de ejemplo (empresas, servicios, profesionales, órdenes)
+
+### Paso 4: Iniciar servidor
+```powershell
 python manage.py runserver
 ```
 
-### Credenciales de prueba
-- **Usuario admin**: `admin`
+### 🔐 Credenciales de acceso
+- **Usuario**: `admin`
 - **Contraseña**: `admin123`
-- **Acceso al admin**: http://127.0.0.1:8000/admin/
+- **Login**: http://127.0.0.1:8000/accounts/login/
+- **Admin Django**: http://127.0.0.1:8000/admin/
 
 El proyecto contiene la app `core` con los modelos Empresa, Servicio, Profesional y OrdenServicio y CRUD básico.
 
